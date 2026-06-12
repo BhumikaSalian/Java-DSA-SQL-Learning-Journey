@@ -1,0 +1,28 @@
+Create project and connect database
+
+Set Environment variables
+JAVA_HOME, MAVEN_HOME
+
+Maven->Architect->GroupID->Project Name->Save in folder
+
+Select mysqlConnector/j -> Click the recent result -> Select Version(9.7.0) 
+-> Scroll down to Dependency Snippet -> Click and copy the snippet dependency 
+-> Search for dependency (open or close types) -> Paste the dependency 
+-> Paste it inside <dependencies> of pom.xml
+
+Four JDBC Operations:
+1. INSERT
+st.executeUpdate(
+    "INSERT INTO Student VALUES(1,'Bhumika')");
+
+2. SELECT
+ResultSet rs =
+    st.executeQuery("SELECT * FROM Student");
+
+3. UPDATE
+st.executeUpdate(
+    "UPDATE Student SET name='Bhumi' WHERE id=1");
+
+4. DELETE
+st.executeUpdate(
+    "DELETE FROM Student WHERE id=1");

@@ -1,0 +1,48 @@
+create database 'Bhumi'
+use Bhumi;
+create table CreditCard(
+    cardNo bigint not null primary key,
+    cardHolder varchar(255) not null,
+    cardLimit int not null,
+    cardStatus varchar(255) default 'active'
+);
+describe CreditCard
+
+create table Merchant(
+    merchantId int not null primary key,
+    merchantName varchar(255) not null,
+    merchantAccount bigint not null
+);
+describe Merchant
+
+create table Transactions(
+    tId bigint not null primary key auto_increment,
+    tDate date not null,
+    tAmount double not null,
+    tBy bigint not null,
+    tTo int not null,
+    foreign key(tBy) references CreditCard(cardNo),
+    foreign key(tTo) references Merchant(merchantId)
+);
+describe Transactions
+
+insert into CreditCard values(144224902570,'Bhumika Salian','5000','active');
+insert into CreditCard values(648289272392,'Rakshith','10000','active');
+insert into CreditCard values(347348346489,'Ramika','500','inactive');
+
+insert into Merchant values(17,'Ziggy',9876543210);
+insert into Merchant values(19,'Chotu',1098765432);
+insert into Merchant values(27,'Goofy',3210987654);
+
+insert into Transactions values(1234567890,now(),250.0,144224902570,19);
+insert into Transactions values(3456789012,now(),500.45,648289272392,27);
+insert into Transactions values(5678901234,now(),900.87,144224902570,17);
+insert into Transactions values(3456789012,now(),70.45,648289272392,17);
+
+Select * from Transactions;
+Select * from Transactions where tBy = 144224902570;
+Select * from CreditCard where cardNo = 648289272392;
+
+Select * from Transactions inner join Merchant on Merchant.merchantId = 17
+
+Select tAmount,tDate,Merchant.merchantName from Transactions inner join Merchant on Merchant.merchantId = 17
